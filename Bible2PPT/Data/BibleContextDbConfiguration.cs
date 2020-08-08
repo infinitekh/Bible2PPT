@@ -15,6 +15,7 @@ namespace Bible2PPT.Data
             SetProviderFactory("System.Data.SQLite", SQLiteFactory.Instance);
             SetProviderFactory("System.Data.SQLite.EF6", SQLiteProviderFactory.Instance);
             SetProviderServices("System.Data.SQLite", (DbProviderServices)SQLiteProviderFactory.Instance.GetService(typeof(DbProviderServices)));
+            SetMigrationSqlGenerator("System.Data.SQLite", () => new MigrationSqLiteGenerator());
         }
     }
 
