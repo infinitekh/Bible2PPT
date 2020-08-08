@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using Bible2PPT.Bibles;
 using Bible2PPT.Jobs;
+using Bible2PPT.Migrations;
 using SQLite.CodeFirst;
 
 namespace Bible2PPT.Data
@@ -40,7 +41,7 @@ namespace Bible2PPT.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            Database.SetInitializer(new SqliteDropCreateDatabaseWhenModelChanges<BibleContext>(modelBuilder));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BibleContext, Configuration>());
 
             modelBuilder.Entity<Bible>().HasIndex(e => e.SourceId);
 

@@ -31,6 +31,12 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
+  <!-- Bug with the SDK for .NET Framework projects. The resx migrations are not included
+  See: https://github.com/dotnet/ef6/issues/1258#issuecomment-531355034 -->
+  <PropertyGroup>
+    <EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
+  </PropertyGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Resources\**\*" />
   </ItemGroup>
