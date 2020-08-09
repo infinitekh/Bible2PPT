@@ -14,7 +14,7 @@ namespace Bible2PPT.Data
         public DbSet<Verse> Verses { get; set; }
         public DbSet<Job> Jobs { get; set; }
 
-        public BibleContext() : this("Data Source=:memory:")
+        public BibleContext() : this("BibleContext")
         {
             // required for tooling (see https://wildermuth.com/2017/07/06/Program-cs-in-ASP-NET-Core-2-0).
         }
@@ -41,8 +41,6 @@ namespace Bible2PPT.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BibleContext, Configuration>());
-
             modelBuilder.Entity<Bible>().HasIndex(e => e.SourceId);
 
             modelBuilder.Entity<Book>().HasIndex(e => e.SourceId);
@@ -56,6 +54,13 @@ namespace Bible2PPT.Data
 
             modelBuilder.Entity<JobBible>().HasRequired(e => e.Job).WithMany(e => e.JobBibles);
             modelBuilder.Entity<JobBible>().HasRequired(e => e.Bible).WithMany();
+
+            Database.SetInitializer(new SqliteMigrateDatabaseToLatestVersion<BibleContext, Configuration>(modelBuilder, true));
+        }
+
+        public void Migrate()
+        {
+            Database.Initialize(false);
         }
     }
 }

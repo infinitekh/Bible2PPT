@@ -47,7 +47,11 @@ namespace Bible2PPT
             services.AddTransient<Builder>();
             // TODO: EF Core 사용하면 AddDbContextPool로 바꾸기
             services.AddScoped<BibleContext>(_ =>
-                new BibleContext(ConfigurationManager.ConnectionStrings["BibleContext"].ConnectionString));
+            {
+                var db = new BibleContext();
+                db.Migrate();
+                return db;
+            });
             services.AddTransient<BibleService>();
             services.AddTransient<ZippedBibleService>();
 

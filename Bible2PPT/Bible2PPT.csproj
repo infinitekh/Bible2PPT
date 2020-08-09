@@ -72,7 +72,7 @@
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="FontAwesome.Sharp" Version="5.13.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
-    <PackageReference Include="SQLite.CodeFirst" Version="1.6.0.30" />
+    <PackageReference Include="SQLite.CodeFirst" Version="1.0.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.1" />
     <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.113" />
     <PackageReference Include="System.Linq.Async" Version="4.1.1" />

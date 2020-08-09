@@ -1,9 +1,5 @@
-﻿using System.Data.Common;
-using System.Data.Entity;
-using System.Data.Entity.Core.Common;
-using System.Data.Entity.Infrastructure;
-using System.Data.SQLite;
-using System.Data.SQLite.EF6;
+﻿using System.Data.Entity;
+using SQLite.CodeFirst;
 
 namespace Bible2PPT.Data
 {
@@ -11,19 +7,7 @@ namespace Bible2PPT.Data
     {
         public BibleContextDbConfiguration()
         {
-            SetDefaultConnectionFactory(new SQLiteConnectionFactory());
-            SetProviderFactory("System.Data.SQLite", SQLiteFactory.Instance);
-            SetProviderFactory("System.Data.SQLite.EF6", SQLiteProviderFactory.Instance);
-            SetProviderServices("System.Data.SQLite", (DbProviderServices)SQLiteProviderFactory.Instance.GetService(typeof(DbProviderServices)));
-            SetMigrationSqlGenerator("System.Data.SQLite", () => new MigrationSqLiteGenerator());
-        }
-    }
-
-    class SQLiteConnectionFactory : IDbConnectionFactory
-    {
-        public DbConnection CreateConnection(string nameOrConnectionString)
-        {
-            return new SQLiteConnection(nameOrConnectionString);
+            SetMigrationSqlGenerator("System.Data.SQLite", () => new SqliteMigrationSqlGenerator());
         }
     }
 }
